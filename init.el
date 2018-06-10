@@ -7,7 +7,7 @@
     )
   (require 'cl)
   (require 'php-mode)
-  (add-hook 'php-mode-hook
+  (add-hook 'php-mode-hookxx
             '(lambda ()
                (auto-complete-mode t)
                (require 'ac-php)
@@ -32,15 +32,16 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;加载各个目录的el
 (setq cxm-startup-dir (file-name-directory load-file-name)
       cxm-config-dir (expand-file-name "config" cxm-startup-dir)
       cxm-site-lisp-dir (expand-file-name "site-lisp" cxm-startup-dir))
       
 (message load-file-name)
 (add-to-list 'load-path cxm-config-dir)
+(mapc 'load (directory-files cxm-config-dir t "^[0-9]+-.*.el"))
 
 (set-default-font "-*-Ayuthaya-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
-(define-key global-map [C-@] 'set-mark-command)
 
 ;;; recently opened file
 (require 'recentf)
